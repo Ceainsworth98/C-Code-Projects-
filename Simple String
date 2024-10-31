@@ -1,0 +1,12 @@
+//Carissa Ainsworth
+//Programming Assignment 2a
+//2/7/2021
+
+#include <iostream>
+using namespace std;
+
+int main()
+{
+    cout<<"Follow your inner moonlight don't hide the madness.";
+    return 0;
+}
