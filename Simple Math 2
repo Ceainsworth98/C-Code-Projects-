@@ -1,0 +1,20 @@
+//Carissa Ainsworth
+//Programming Assignment 2d
+//2/7/2021
+
+#include <iostream>
+using namespace std;
+
+int main()
+{
+    //Division of two integers
+
+    int numberone, numbertwo, dividend;
+    numberone=846;
+    numbertwo=141;
+
+    dividend= numberone / numbertwo;
+
+    cout<<"The result of " <<numberone<<" divided by "<<numbertwo<< " is "<<dividend<<".";
+    return 0;
+}
