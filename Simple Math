@@ -1,0 +1,20 @@
+//Carissa Ainsworth
+//Programming Assignment 2c
+//2/7/2021
+
+#include <iostream>
+using namespace std;
+
+int main()
+{
+    //subtraction of two numbers
+
+    int numberone, numbertwo, difference;
+    numberone=1000;
+    numbertwo=850;
+
+    difference= numberone - numbertwo;
+    
+    cout<<"The difference of "<<numberone<< " and "<<numbertwo<< " is "<<difference<<".";
+    return 0;
+}
