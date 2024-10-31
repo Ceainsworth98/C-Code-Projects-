@@ -1,0 +1,20 @@
+//Carissa Ainsworth
+//Programing Assignment 2b
+//2/7/2021
+
+#include <iostream>
+using namespace std;
+
+int main()
+{
+    //addition of two numbers
+
+    int numberone, numbertwo,sum;
+    numberone=150;
+    numbertwo=450;
+
+    sum= numberone + numbertwo;
+
+    cout<<"The sum of "<<numberone<<" and "<<numbertwo<<" is "<<sum<<".";
+    return 0;
+}
