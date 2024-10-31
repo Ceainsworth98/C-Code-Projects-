@@ -1,0 +1,72 @@
+//Carissa Ainsworth
+//Mini Project 3
+//3/21/2021
+
+#include <iostream>
+#include <iomanip> //To set precision
+using namespace std;
+
+//function definition
+double volumeCalculator(double length,double width,double height)
+{
+    return length*width*height;
+}
+
+int main()
+{
+    double rate, tax, shipping, total, length, width, height, sales;
+    tax=0.0775; //Sales tax per dollar (California)
+
+    cout<<"East County Box Company\n\n";
+    cout<<"Sales Program (version 1.5)\n\n\n";
+
+   do //Set loop if fails to be under 65 cubic feet
+   {
+       cout<<"Enter package dimensions (feet):\n";
+       cout<<"Length: ";
+       cin >> length;
+       cout<<"Width:  ";
+       cin >> width;
+       cout<<"Height: ";
+       cin >> height;
+
+       //Display calculation
+       cout<<"\nPackage Volume: "<< volumeCalculator(height,length,width) <<" cubic feet\n\n";
+        
+        //Desired precision for cost
+        cout<< setprecision(2)<< fixed <<showpoint;
+
+       //Determine rates based on volume
+        if (volumeCalculator(height,length,width)<=15)
+        {
+         rate=1.50; //rate for box under 15 cubic feet
+         shipping = volumeCalculator(height,length,width)* rate; 
+         cout<<"Shipping Cost ($1.50 per cubic foot)  $"<<setw(10)<<shipping<<endl;
+        }    
+        else if (volumeCalculator(height,length,width)<=45)
+        {
+         rate=2.50; //rate for box over 15 cubic feet but under 45 cubic feet
+         shipping = volumeCalculator(height,length,width) * rate; 
+         cout<<"Shipping Cost ($2.50 per cubic foot)  $"<<setw(10)<<shipping<<endl;
+        }    
+        else if (volumeCalculator(height,length,width)<=65)
+        {
+         rate=3.00; //rate for  box over 45 cubic feet but under 65 cubic feet
+         shipping = volumeCalculator(height,length,width) * rate; 
+         cout<<"Shipping Cost ($3.00 per cubic foot)  $"<<setw(10)<<shipping<<endl;
+        }
+        else if (volumeCalculator(height,length,width)>65) //Error message to prompt new loop
+        {
+         cout<< "We do not ship packages larger than 65 cubic feet.\nPlease enter new dimensions.\n"<<endl ;
+        }
+    } while (volumeCalculator(height,length,width)>65); //Restriction for the volume of the box to repeat loop
+
+    //Calculate the sales tax (California)
+         sales = shipping * tax;
+         cout<<"Sales Tax (0.0775)"<<setw(21)<<right<< "$" <<setw(10)<<sales<<endl<<endl;
+
+    //Calculate the total cost 
+       total = shipping + sales;
+       cout<<"Total"<<setw(34)<<right<< "$" <<setw(10)<<total<<endl;
+    return 0;
+}
