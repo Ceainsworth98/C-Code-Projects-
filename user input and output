@@ -1,0 +1,22 @@
+//Carissa Ainsworth
+//Programming Assignment 3a
+//2/10/2021
+
+#include <iostream>
+using namespace std;
+
+int main()
+{
+    int numberone, numbertwo, sum;
+
+    //User picks numbers
+    cout<<"Pick a number: ";
+    cin>> numberone;
+    cout<<"Pick another number: ";
+    cin>> numbertwo;
+
+    //Equation for sum
+    sum= numberone + numbertwo;
+    cout<<"\nThe sum of "<< numberone << " and "<< numbertwo << " is "<< sum<< "."<<endl;
+    return 0;
+}
