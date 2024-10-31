@@ -1,0 +1,45 @@
+//Carissa Ainsworth
+//Mini Project 1
+//2/14/2021
+
+#include <iostream>
+#include <iomanip> //To set precision
+using namespace std;
+
+int main()
+{
+    double rate, tax, shipping, total, length, width, height, volume, sales;
+    rate=2.50; //Standard rate per cubic foot
+    tax=0.0775; //Sales tax per dollar (California)
+
+    cout<<"East County Box Company\n\n";
+    cout<<"Sales Program (version 1.5)\n\n\n";
+    cout<<"Enter package dimensions (feet):\n";
+    cout<<"Length: ";
+    cin >> length;
+    cout<<"Width:  ";
+    cin >> width;
+    cout<<"Height: ";
+    cin >> height;
+
+    //Calculate the package volume
+    volume = length* width * height;
+    cout<<"\nPackage Volume: "<< volume <<" cubic feet\n\n";
+
+    //Desired precision for cost
+    cout<< setprecision(2)<< fixed <<showpoint;
+
+    //Calculate the shipping cost
+    shipping = volume * rate;
+    cout<<"Shipping Cost ($2.50 per cubic foot)  $"<<setw(10)<<shipping<<endl;
+
+    //Calculate the sales tax (California)
+    sales = shipping * tax;
+    cout<<"Sales Tax (0.0775)                    $"<<setw(10)<<sales<<endl<<endl;
+
+    //Calculate the total cost 
+    total = shipping + sales;
+    cout<<"Total                                 $"<<setw(10)<<total<<endl;
+    return 0;
+}
+
