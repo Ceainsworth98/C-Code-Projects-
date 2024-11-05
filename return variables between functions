@@ -1,0 +1,59 @@
+//Carissa Ainsworth
+//Programming Assignment 9c
+//5/6/2021
+
+#include <iostream>
+using namespace std;
+
+//function protype
+void changeA(int *);
+void changeB(int *);
+
+int main ()
+{
+    int num1, num2, total;
+    
+    //Get A and B 
+    cout<<"Enter an integer number (a): ";
+    cin>> num1;
+    cout<<"\nEnter an integer number (b): ";
+    cin>> num2;
+
+    //The change in A
+    cout<<"\nThe initial number for a is " <<num1<< ".\n";
+    changeA(&num1);
+    cout<<"The changed number for a is " <<num1<<".\n\n";
+
+    //The change in B
+    cout<<"The initial number for a is " <<num2<< ".\n";
+    changeB(&num2);
+    cout<<"The changed number is " <<num2<<".\n\n";
+
+    //State sum
+    total=num1+num2;
+    cout<<"The sum of "<<num1<< " and " <<num2<< " are "<<total<<".\n";
+    return 0;
+}
+
+void changeA(int *num1)
+{
+    *num1 *=3;
+}
+
+void changeB(int *num2)
+{
+    *num2 *=2;
+}
+
+Enter an integer number (a): 5
+
+Enter an integer number (b): 3
+
+The initial number for a is 5. 
+The changed number for a is 15.
+
+The initial number for a is 3.
+The changed number is 6.
+
+The sum of 15 and 6 are 21.
+PS C:\Users\Carissa\Documents\C++ programing work> 
