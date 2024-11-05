@@ -1,0 +1,75 @@
+//Carissa Ainsworth 
+//Programming Assignment 11b
+//5/16/2021
+
+#include <iostream>
+#include <string>
+#include <iomanip> //To set precision
+using namespace std;
+
+struct inventory
+{
+    string name; //name of item
+    double price; //price of item
+    double quantity; //quantity in stock
+};
+
+int main()
+{
+    const int num_items =3; //number of items 
+    inventory item[num_items]; //array of structures
+    int x; //loop counter
+
+    for(x = 0; x<num_items; x++)
+    {
+        cout<<"Enter the following data about the item #"<<(x+1)<<endl;
+        cout<<"Name of item: ";
+        cin>>item[x].name;
+        cout<<"Price: $";
+        cin>>item[x].price;
+        cout<<"Quantity: ";
+        cin>>item[x].quantity;
+        cout<<endl;
+    }
+    //display items
+    cout<< "\nHere is the data on your items:\n";
+    for(x=0; x<num_items; x++)
+    {
+        cout<<"Item #"<<(x+1)<<": "<<item[x].name<<endl;
+        cout<< setprecision(2)<< fixed <<showpoint; //set precision
+        cout<<"Price: $"<<item[x].price<<endl;
+        cout<<"Quantity: "<<item[x].quantity<<endl<<endl;
+    } 
+    return 0;
+}
+
+Enter the following data about the item #1
+Name of item: doll
+Price: $5
+Quantity: 30
+
+Enter the following data about the item #2
+Name of item: bear 
+Price: $6
+Quantity: 25
+
+Enter the following data about the item #3
+Name of item: blocks
+Price: $3
+Quantity: 16
+
+
+Here is the data on your items:
+Item #1: doll
+Price: $5.00
+Quantity: 30.00
+
+Item #2: bear
+Price: $6.00
+Quantity: 25.00
+
+Item #3: blocks
+Price: $3.00
+Quantity: 16.00
+
+PS C:\Users\Carissa\Documents\C++ programing work> 
