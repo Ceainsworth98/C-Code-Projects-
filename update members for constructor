@@ -1,0 +1,26 @@
+//Carissa Ainsworth
+//Programming Assignment 13c
+//5/30/2021
+
+class Student
+{
+    private:
+    string StudentID;
+    string LastName;
+    string FirstName;
+    string SSN;
+    
+    public:
+        Student();
+};
+Student::Student()
+{
+    cout<<"What is the student's first name?\n";
+    cin>> FirstName;
+    cout<<"What is the student's last name?\n";
+    cin>> LastName;
+    cout<<"What is the student's ID?\n";
+    cin>> StudentID;
+    cout<<"What is the students SSN?\n";
+    cin>> SSN;
+}
