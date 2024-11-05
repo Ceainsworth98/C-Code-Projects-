@@ -1,0 +1,444 @@
+//Carissa Ainsworth
+//Mini Project 7 
+//6/2/2021
+
+#include <iostream>
+#include <iomanip> //To set precision
+#include <string.h> 
+using namespace std;
+
+//Class for box
+class Container
+{
+    private:
+        double length, width, height; //to get dimensions of box
+        double volume, rate, shiprate; //rate=rate of box size charge, shiprate= rate of shipping
+        double bcost; //box cost 
+        double shipcost; //cost of shipping
+        int delivery; //delivery selection
+        string ship_mode;//mode of shipping
+
+    public:
+        Container*next;
+    
+    //imput
+    void  setimput()
+    {
+        cout<<"Height: ";
+        cin >> height;
+        cout<<"\nLength: ";
+        cin >> length;
+        cout<<"\nWidth:  ";
+        cin >> width;
+    }
+
+    //volume
+    double getVolume()
+    {
+        return volume;
+    }
+
+    string get_shipmode()
+    {
+        return ship_mode;
+    }
+
+    //volume cost
+    double getcostbox()
+    {
+        return bcost;
+    }
+
+    //shipping cost
+    double getcostshipping()
+    {
+        return shipcost; 
+    }
+
+    //Volume Calculator
+    double Volume()
+    {
+        volume = length*width*height;
+        return volume;
+    }
+
+    //Box cost
+    void Cost()
+    {
+        do //Set loop if fails to be under 65 cubic feet
+        {
+            //Desired precision for cost
+            cout<< setprecision(2)<< fixed <<showpoint;
+        
+            //Determine rates based on volume
+            if (volume<=15)
+            {
+                rate=1.50; //rate for box under 15 cubic feet
+                bcost = volume* rate; 
+                cout<<"\nSmall Package ($1.50 per cu ft)  $"<<bcost<<endl<<endl;
+            }    
+            else if (volume<=45)
+            {
+                rate=2.50; //rate for box over 15 cubic feet but under 45 cubic feet
+                bcost = volume* rate; 
+                cout<<"\nMedium Package ($2.50 per cu ft)  $"<<bcost<<endl<<endl;
+            }    
+            else if (volume<=65)
+            {
+                rate=3.00; //rate for  box over 45 cubic feet but under 65 cubic feet
+                bcost = volume * rate; 
+                cout<<"\nLarge Package ($3.00 per cu ft)  $"<<bcost<<endl<<endl;
+            }
+            else if (volume>65) //Error message to prompt new loop
+            {
+                cout<< "\nWe do not ship packages larger than 65 cubic feet.\nPlease enter new dimensions.\n"<<endl ;
+            }
+        } while (volume>65); //Restriction for the volume of the box to repeat loop
+    }
+
+    //Shipping for package
+    void Shipping()
+    {
+        if (volume<=30) //offers air for packages under 30 cubic feet
+        {
+            cout<< "\nHow is this container to be shipped:\n\n";
+            cout<<"(1) Standard-(one to two weeks) - No change to the price\n";
+            cout<<"(2) Fast Ground - (3 to 5 business day) - Extra $1.50 per cubic foot\n";
+            cout<<"(3) Air-(1-2 business days)-Only applies to packages under 30 cubic feet - Extra $3.00 per cubic foot\n\n";
+        }
+        else 
+        {
+            cout<< "\nHow is this container to be shipped:\n\n";
+            cout<<"(1) Standard-(one to two weeks) - No change to the price\n";
+            cout<<"(2) Fast Ground - (3 to 5 business day) - Extra $1.50 per cubic foot\n\n";
+        }
+
+        cout<<"Delivery: ";
+        cin>> delivery;
+
+        //Shipping cost calculation
+        switch (delivery)
+        {
+            case 1:
+            {
+                shiprate=0.00;
+                shipcost=volume*shiprate;
+                cout<<"\nStandard: $"<<shipcost;
+                ship_mode="STD -";
+                break;
+            }
+            case 2:
+            {
+                shiprate=1.50;
+                shipcost= volume*shiprate;
+                cout<<"\nFast Ground ($1.50 per cu ft): $"<<shipcost;
+                ship_mode="FG - ";
+                break;
+            }
+            case 3:
+            {
+                shiprate=3.00;
+                shipcost = volume*shiprate;
+                cout<<"\nAir($3.00 per cu ft): $"<<shipcost;
+                ship_mode="AIR -";
+                break;
+            }
+        }
+    }
+};
+
+//Manage orders
+class Order
+{
+    private:
+        int c;//c=count
+        char morebox; //adding more boxes
+        double sales, total;
+        string firstname, lastname, date;
+
+        double cash, change;
+        int pay_type;
+        string license, card;
+        char card_type;
+    
+    public:
+
+    Container*first;
+
+    Order()
+    {
+        first = NULL;
+        c=0;
+    }
+
+    //Get order from customer 
+    void getOrder()
+    {
+        //Format for opening program
+            cout<<"****East County Box Company****\n\n";
+            cout<<"Cashiering system 2.0\n\n";
+            cout<<"Starting Transactions - date - ";
+            cin>>date;
+            cout<<"\nStarting at Transaction #1\n\n";
+            cout<<"Enter Customer's name: ";
+            cin>> firstname >>lastname;
+            cout <<"\nCustomer Name: "<<firstname<<" "<<lastname;
+
+        //Loop for orders
+        do
+        {
+            c++;
+            cout<<"\n\nEnter package dimensions for container # "<< c <<" (in feet):\n";
+            Container *newContainer;
+            newContainer = new Container();
+
+            newContainer->setimput();
+
+            double volume = newContainer->Volume();
+
+            cout<<"\nVolume of container #"<<c<<" is "<<volume<<" cu ft";
+
+            newContainer->Cost();
+
+            newContainer->Shipping();
+
+            newContainer->next = NULL;
+
+        // add node in containers list i.e. order list
+            if(first==NULL)
+            {
+                first = newContainer;
+            }
+            else
+            {
+                Container *temp = first;
+            while(temp->next != NULL)
+                temp = temp->next;
+                temp->next = newContainer;
+            }
+
+            cout<<"\n\nAnother container (y/n): ";
+            cin>>morebox;
+        } while (morebox == 'Y' || morebox == 'y');
+    }
+
+    //Display invoice
+    void displayOrder()
+    {
+        int count=1;
+        double subtotal;
+        const double tax=0.0775; //Sales tax per dollar (California)
+
+        //Recipt
+        cout<<"\n\n\n\n\n\nEast County Cargo Transport\n";
+        cout<<"\n123 First Street";
+        cout<<"\nEl Cajon, CA 92071\n\n";
+        cout<<"Customer Receipt - "<<date<<endl;
+        cout<<"\nCustomer Name: "<<firstname<<" "<<lastname<<endl;
+        
+        Container *temp = first;
+
+        while(temp!=NULL)
+        {
+            cout<<"\n\nContainer #"<<count<<" - "<<setw(5)<<temp->getVolume()<<" cu ft "<<setw(12)<<right<<"$"<<setw(10)<<temp->getcostbox();
+            cout<<"\nShipping: "<<temp->get_shipmode()<<setw(24)<<right<<"$"<<setw(10)<<temp->getcostshipping();
+            subtotal = subtotal+temp->getcostbox()+temp->getcostshipping();
+            count++;
+            
+            temp = temp->next;
+        }
+
+        //Subtotal
+            cout<<"\n\nSubtotal"<<setw(31)<<right<<"$"<<setw(10)<<subtotal<<endl;
+
+        //Calculate the sales tax (California)
+            sales= subtotal*tax;
+            cout<<"Sales Tax - 7.75%"<<setw(22)<<right<< "$" <<setw(10)<<sales<<endl<<endl;
+            
+        //Calculate the total cost
+            total = subtotal+sales;
+            cout<<"Total"<<setw(34)<<right<< "$" <<setw(10)<<total<<endl<<endl;
+        
+        //payment
+            cout<< "\nPayment(1.Cash, 2.Check, 3.Credit): ";
+            cin>>pay_type;
+
+            if (pay_type==1) //Cash
+            {
+                do //set loop for verifying amount of cash
+                {
+                    cout<< "\nAccepted:" <<setw(34)<<right<< "$    ";
+                    cin>> cash;
+
+                    if (total <= cash)
+                    {
+                        change = cash - total;
+                        cout<<"Change:"<<setw(32)<<right<< "$"<<setw(10)<<change;
+                    }
+                    else 
+                    {
+                        cout<< "\nPlease imput total funds more than $"<<total<<endl<<endl;    
+                    }
+                }while (total>cash);
+            }
+            else if (pay_type==2) //Check
+            {
+                cout<<"\nEnter Driver License No:"<<setw(6)<<right;
+                cin>> license;
+
+                //Set loop for verifying license
+                if (license.size() != 8 || !isalpha(license[0]))
+                {
+                    cout<<"Enter Driver License No:"<<setw(6)<<right;
+                    cin>> license;
+                }
+
+                cout<<"Accepted Check Payment:"<<setw(5)<<right<<"$"<<setw(10)<<total;
+            }
+            else if (pay_type==3)//Card
+            {
+                cout<<"\nVisa(V) or Mastercard (M):"<<setw(12)<<right;
+                cin>> card_type;
+
+                //Set loop for verifying Card
+                do 
+                {
+                    cout<<"\nEnter Last Four Digits of Card:"<<setw(8)<<right;
+                    cin>>card;
+                }while (card.size() !=4); 
+
+                cout<<"\nAccepted Credit Card Payment:"<<setw(10)<<right<<"$"<<setw(10)<<total;
+            }
+    }
+};
+
+// Run the classes
+int main()
+{
+   Order o;
+   o.getOrder();
+   o.displayOrder();
+   return 0;
+}
+
+
+
+****East County Box Company****
+
+Cashiering system 2.0
+
+Starting Transactions - date - 05/28/2020
+
+Starting at Transaction #1
+
+Enter Customer's name: Jerry Lewis
+
+Customer Name: Jerry Lewis
+
+Enter package dimensions for container # 1 (in feet):
+Height: 3
+
+Length: 4
+
+Width:  2
+
+Volume of container #1 is 24 cu ft
+Medium Package ($2.50 per cu ft)  $60.00
+
+
+How is this container to be shipped:
+
+(1) Standard-(one to two weeks) - No change to the price
+(2) Fast Ground - (3 to 5 business day) - Extra $1.50 per cubic foot
+(3) Air-(1-2 business days)-Only applies to packages under 30 cubic feet - Extra $3.00 per 
+cubic foot
+
+Delivery: 2
+
+Fast Ground ($1.50 per cu ft): $36.00
+
+Another container (y/n): y
+
+
+Enter package dimensions for container # 2 (in feet):
+Height: 9
+
+Length: 2
+
+Width:  3
+
+Volume of container #2 is 54.00 cu ft
+Large Package ($3.00 per cu ft)  $162.00
+
+
+How is this container to be shipped:
+
+(1) Standard-(one to two weeks) - No change to the price
+(2) Fast Ground - (3 to 5 business day) - Extra $1.50 per cubic foot
+
+Delivery: 1
+
+Standard: $0.00
+
+Another container (y/n): y
+
+
+Enter package dimensions for container # 3 (in feet):
+Height: 1
+
+Length: 2
+
+Width:  4
+
+Volume of container #3 is 8.00 cu ft
+Small Package ($1.50 per cu ft)  $12.00
+
+
+How is this container to be shipped:
+
+(1) Standard-(one to two weeks) - No change to the price
+(2) Fast Ground - (3 to 5 business day) - Extra $1.50 per cubic foot
+(3) Air-(1-2 business days)-Only applies to packages under 30 cubic feet - Extra $3.00 per 
+cubic foot
+
+Delivery: 3
+
+Air($3.00 per cu ft): $24.00
+
+Another container (y/n): n
+
+
+
+
+
+
+East County Cargo Transport
+
+123 First Street
+El Cajon, CA 92071
+
+Customer Receipt - 05/28/2020
+
+Customer Name: Jerry Lewis
+
+
+Container #1 - 24.00 cu ft            $     60.00
+Shipping: FG -                        $     36.00
+
+Container #2 - 54.00 cu ft            $    162.00
+Shipping: STD -                       $      0.00
+
+Container #3 -  8.00 cu ft            $     12.00
+Shipping: AIR -                       $     24.00
+
+Subtotal                              $    294.00
+Sales Tax - 7.75%                     $     22.79
+
+Total                                 $    316.79
+
+
+Payment(1.Cash, 2.Check, 3.Credit): 1
+
+Accepted:                             $    320.00
+Change:                               $      3.21
+PS C:\Users\Carissa\Documents\C++ programing work> 
