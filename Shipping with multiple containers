@@ -1,0 +1,134 @@
+//Carissa Ainsworth
+//Mini Project 4
+//4/11/2021
+
+#include <iostream>
+#include <iomanip> //To set precision
+#include <numeric>
+using namespace std;
+
+//function Prototypes
+double volumeCalculator(double, double, double);
+double boxcost(double);
+
+int main()
+{
+    double shipping, total, sales, boxprice,cost;
+    double subtotal;
+    const double tax=0.0775; //Sales tax per dollar (California)
+    char morebox;
+
+    cout<<"East County Box Company\n\n";
+    cout<<"Sales Program (version 1.5)\n\n\n";
+
+    do
+    {
+         cost = boxcost (shipping); 
+         cout<<"Add another package (Y/N): ";
+         cin>>morebox;
+         subtotal+=cost;
+    } while (morebox == 'Y' || morebox == 'y');
+
+    //Calculate the subtotal
+         cout<< "SubTotal" <<setw(31)<<right<< "$" <<setw(10)<<subtotal<<endl;
+   
+    //Calculate the sales tax (California)
+         sales = subtotal * tax;
+         cout<<"Sales Tax (0.0775)"<<setw(21)<<right<< "$" <<setw(10)<<sales<<endl<<endl;
+
+    //Calculate the total cost 
+       total = subtotal + sales;
+       cout<<"Total"<<setw(34)<<right<< "$" <<setw(10)<<total<<endl;
+    return 0;
+}
+
+double volumeCalculator(double length, double width, double height)
+{
+    cout<<"Enter package dimensions (feet):\n";
+    cout<<"Length: ";
+    cin >> length;
+    cout<<"Width:  ";
+    cin >> width;
+    cout<<"Height: ";
+    cin >> height;
+    return length*width*height;
+}
+
+double boxcost(double shipping)
+{
+    double height, width, length, rate, volume, cost;
+    do //Set loop if fails to be under 65 cubic feet
+   {
+       //Call volumeCalculator
+       volume = volumeCalculator(height,width,length);
+       cout<<"\nPackage Volume: "<< volume <<" cubic feet\n";
+       
+       //Desired precision for cost
+       cout<< setprecision(2)<< fixed <<showpoint;
+
+       //Determine rates based on volume
+        if (volume<=15)
+        {
+         rate=1.50; //rate for box under 15 cubic feet
+         shipping = volume* rate; 
+         cout<<"Shipping Cost ($1.50 per cubic foot)  $"<<setw(10)<<shipping<<endl<<endl;
+        }    
+        else if (volume<=45)
+        {
+         rate=2.50; //rate for box over 15 cubic feet but under 45 cubic feet
+         shipping = volume* rate; 
+         cout<<"Shipping Cost ($2.50 per cubic foot)  $"<<setw(10)<<shipping<<endl<<endl;
+        }    
+        else if (volume<=65)
+        {
+         rate=3.00; //rate for  box over 45 cubic feet but under 65 cubic feet
+         shipping = volume * rate; 
+         cout<<"Shipping Cost ($3.00 per cubic foot)  $"<<setw(10)<<shipping<<endl<<endl;
+        }
+        else if (volume>65) //Error message to prompt new loop
+        {
+         cout<< "We do not ship packages larger than 65 cubic feet.\nPlease enter new dimensions.\n"<<endl ;
+        }
+
+    } while (volume>65); //Restriction for the volume of the box to repeat loop
+    return shipping;
+}
+
+
+East County Box Company
+
+Sales Program (version 1.5)     
+
+
+Enter package dimensions (feet):
+Length: 5
+Width:  3
+Height: 2
+
+Package Volume: 30 cubic feet
+Shipping Cost ($2.50 per cubic foot)  $     75.00
+
+Add another package (Y/N): y
+Enter package dimensions (feet):
+Length: 5
+Width:  4
+Height: 3
+
+Package Volume: 60.00 cubic feet
+Shipping Cost ($3.00 per cubic foot)  $    180.00
+
+Add another package (Y/N): y
+Enter package dimensions (feet):
+Length: 2
+Width:  2
+Height: 2
+
+Package Volume: 8.00 cubic feet
+Shipping Cost ($1.50 per cubic foot)  $     12.00
+
+Add another package (Y/N): n
+SubTotal                              $    267.00
+Sales Tax (0.0775)                    $     20.69
+
+Total                                 $    287.69
+PS C:\Users\Carissa\Documents\C++ programing work> 
