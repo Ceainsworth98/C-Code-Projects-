@@ -1,0 +1,215 @@
+//Carissa Ainsworth
+//Mini Project 5
+//4/25/2021
+
+#include <iostream>
+#include <iomanip> //To set precision
+#include <string> //To get license and card
+using namespace std;
+
+//function Prototypes
+double volumeCalculator(double, double, double);
+double boxcost(double);
+double Payment(double);
+double TotalPrice(double);
+
+int main()
+{
+    double total;
+    double change;
+
+    cout<<"East County Box Company\n\n";
+    cout<<"Sales Program (version 1.5)\n\n\n";
+
+    //Payment Type 
+    Payment(change);
+    return 0;
+}
+
+double volumeCalculator(double length, double width, double height) //calculate volume
+{
+    cout<<"Enter package dimensions (feet):\n";
+    cout<<"Length: ";
+    cin >> length;
+    cout<<"Width:  ";
+    cin >> width;
+    cout<<"Height: ";
+    cin >> height;
+    return length*width*height;
+}
+
+double boxcost(double shipping) //calculate shipping
+{
+    double height, width, length, rate, volume, cost;
+    do //Set loop if fails to be under 65 cubic feet
+   {
+       //Call volumeCalculator
+       volume = volumeCalculator(height,width,length);
+       cout<<"\nPackage Volume: "<< volume <<" cubic feet\n";
+       
+       //Desired precision for cost
+       cout<< setprecision(2)<< fixed <<showpoint;
+
+       //Determine rates based on volume
+        if (volume<=15)
+        {
+         rate=1.50; //rate for box under 15 cubic feet
+         shipping = volume* rate; 
+         cout<<"Shipping Cost ($1.50 per cubic foot)  $"<<setw(10)<<shipping<<endl<<endl;
+        }    
+        else if (volume<=45)
+        {
+         rate=2.50; //rate for box over 15 cubic feet but under 45 cubic feet
+         shipping = volume* rate; 
+         cout<<"Shipping Cost ($2.50 per cubic foot)  $"<<setw(10)<<shipping<<endl<<endl;
+        }    
+        else if (volume<=65)
+        {
+         rate=3.00; //rate for  box over 45 cubic feet but under 65 cubic feet
+         shipping = volume * rate; 
+         cout<<"Shipping Cost ($3.00 per cubic foot)  $"<<setw(10)<<shipping<<endl<<endl;
+        }
+        else if (volume>65) //Error message to prompt new loop
+        {
+         cout<< "We do not ship packages larger than 65 cubic feet.\nPlease enter new dimensions.\n"<<endl ;
+        }
+
+    } while (volume>65); //Restriction for the volume of the box to repeat loop
+    return shipping;
+}
+
+double TotalPrice(double total) //calculate price
+{
+    double shipping, sales, cost;
+    double subtotal;
+    const double tax=0.0775; //Sales tax per dollar (California)
+    char morebox;
+    do
+    {
+        cost = boxcost (shipping); 
+        cout<<"Add another package (Y/N): ";
+        cin>>morebox;
+        subtotal+=cost;
+    } while (morebox == 'Y' || morebox == 'y');
+
+    //Calculate the subtotal
+        cout<< "SubTotal" <<setw(31)<<right<< "$" <<setw(10)<<subtotal<<endl;
+   
+    //Calculate the sales tax (California)
+        sales = subtotal * tax;
+        cout<<"Sales Tax (0.0775)"<<setw(21)<<right<< "$" <<setw(10)<<sales<<endl<<endl;
+
+    //Calculate the total cost 
+       total = subtotal + sales;
+       cout<<"Total"<<setw(34)<<right<< "$" <<setw(10)<<total<<endl<<endl;
+    return total;
+}
+
+double Payment(double change)
+{
+    double cash, total, price;
+    int pay_type;
+    string license, card;
+    char card_type;
+
+    price=TotalPrice(total);
+
+    cout<< "Payment(1.Cash, 2.Check, 3.Credit): ";
+    cin>>pay_type;
+
+    if (pay_type==1)
+    {
+        do //set loop for verifying amount of cash
+        {
+            cout<< "Accepted:" <<setw(30)<<right<< "$";
+            cin>> cash;
+
+            if (price <= cash)
+            {
+                change = cash - price;
+                cout<<"Change:"<<setw(32)<<right<< "$"<<change;
+            }
+            else 
+            {
+                cout<< " Please imput total funds more than $"<<price<<endl<<endl;    
+            }
+        }while (price>cash);
+    }
+    else if (pay_type==2)
+    {
+        cout<<"Enter Driver License No:"<<setw(6)<<right;
+        cin>> license;
+       
+        if (license.size() != 8 || !isalpha(license[0]))
+        {
+            cout<<"Enter Driver License No:"<<setw(6)<<right;
+            cin>> license;
+        }
+
+        cout<<"Accepted Check Payment:"<<setw(5)<<right<<"$"<<setw(10)<<price;
+    }
+    else if (pay_type==3)
+    {
+        cout<<"Visa(V) or Mastercard (M):"<<setw(12)<<right;
+        cin>> card_type;
+        do 
+        {
+            cout<<"Enter Last Four Digits of Card:"<<setw(8)<<right;
+            cin>>card;
+        }while (card.size() !=4); 
+
+        cout<<"Accepted Credit Card Payment:"<<setw(10)<<right<<"$"<<setw(10)<<price;
+
+    }
+    return change;
+}
+
+East County Box Company
+
+Sales Program (version 1.5)     
+
+
+Enter package dimensions (feet):
+Length: 2
+Width:  2
+Height: 2
+
+Package Volume: 8 cubic feet
+Shipping Cost ($1.50 per cubic foot)  $     12.00
+
+Add another package (Y/N): n
+SubTotal                              $     12.00
+Sales Tax (0.0775)                    $      0.93
+
+Total                                 $     12.93
+
+Payment(1.Cash, 2.Check, 3.Credit): 1
+Accepted:                             $20
+Change:                               $7.07
+PS C:\Users\Carissa\Documents\C++ programing work> 
+
+
+East County Box Company
+
+Sales Program (version 1.5)
+
+
+Enter package dimensions (feet):
+Length: 2
+Width:  2
+Height: 2
+
+Package Volume: 8 cubic feet
+Shipping Cost ($1.50 per cubic foot)  $     12.00
+
+Add another package (Y/N): n
+SubTotal                              $     12.00
+Sales Tax (0.0775)                    $      0.93
+
+Total                                 $     12.93
+
+Payment(1.Cash, 2.Check, 3.Credit): 3
+Visa(V) or Mastercard (M):v
+Enter Last Four Digits of Card:6589
+Accepted Credit Card Payment:         $     12.93
+PS C:\Users\Carissa\Documents\C++ programing work> 
