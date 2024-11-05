@@ -1,0 +1,37 @@
+//Carissa Ainsworth
+//Programming Assignment 7b
+//4/25/2021
+
+#include <iostream>
+using namespace std;
+int main()
+{
+    const int Num_people =5;
+    int hours[Num_people];
+    int count;
+
+    //input of hours
+    cout<< "How many hours of music did people listen to?\n";
+    for (count = 0; count < Num_people; count++)
+    {
+     cout<< "Person "<<(count+1)<<" listened to: ";
+     cin>> hours[count];
+    }
+    
+    //display of hours
+    cout<< "The hours you entered are: ";
+    for (count = 0; count < Num_people; count++)
+    {
+        cout<< " " << hours[count];
+    }
+    return 0;
+}
+
+How many hours of music did people listen to?
+Person 1 listened to: 5
+Person 2 listened to: 6
+Person 3 listened to: 4
+Person 4 listened to: 12
+Person 5 listened to: 8
+The hours you entered are:  5 6 4 12 8
+PS C:\Users\Carissa\Documents\C++ programing work> 
