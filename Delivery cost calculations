@@ -1,0 +1,305 @@
+//Carissa Ainsworth
+//Mini Project 6
+//5/9/2021
+
+#include <iostream>
+#include <iomanip> //To set precision
+#include <string> //To get license and card
+using namespace std;
+
+//function Prototypes
+double volumeCalculator(double, double, double);
+double Payment(double);
+double TotalPrice(double);
+
+int main()
+{
+    double total;
+    double change;
+
+    cout<<"East County Box Company\n\n";
+    cout<<"Sales Program (version 1.5)\n\n";
+
+    //Payment Type 
+    Payment(change);
+    return 0;
+}
+
+double volumeCalculator(double length, double width, double height) //calculate volume
+{
+    cout<<"\nEnter package dimensions for container (in feet):\n";
+    cout<<"Length: ";
+    cin >> length;
+    cout<<"Width:  ";
+    cin >> width;
+    cout<<"Height: ";
+    cin >> height;
+    return length*width*height;
+}
+
+double TotalPrice(double total) //calculate price
+{
+    double bcost, sales, rate, volume, length, width, height;
+    double boxtotal, precost, pcost, subtotal;
+    double shipcost, shiprate;
+    int delivery;
+    const double tax=0.0775; //Sales tax per dollar (California)
+    char morebox;
+    //loop for more packages
+    do
+    { 
+        do //Set loop if fails to be under 65 cubic feet
+        {
+            //Call volumeCalculator
+            volume= volumeCalculator(height, width, length);
+            cout<<"\nPackage Volume: "<< volume <<" cubic feet\n";
+       
+            //Desired precision for cost
+            cout<< setprecision(2)<< fixed <<showpoint;
+
+            //Determine rates based on volume
+            if (volume<=15)
+            {
+             rate=1.50; //rate for box under 15 cubic feet
+             bcost = volume* rate; 
+             cout<<"Small Package ($1.50 per cubic foot)  $"<<bcost<<endl<<endl;
+            }    
+            else if (volume<=45)
+            {
+             rate=2.50; //rate for box over 15 cubic feet but under 45 cubic feet
+             bcost = volume* rate; 
+             cout<<"Medium Package ($2.50 per cubic foot)  $"<<bcost<<endl<<endl;
+            }    
+            else if (volume<=65)
+            {
+             rate=3.00; //rate for  box over 45 cubic feet but under 65 cubic feet
+             bcost = volume * rate; 
+             cout<<"Large Package ($3.00 per cubic foot)  $"<<bcost<<endl<<endl;
+            }
+            else if (volume>65) //Error message to prompt new loop
+            {
+             cout<< "We do not ship packages larger than 65 cubic feet.\nPlease enter new dimensions.\n"<<endl ;
+            }
+        } while (volume>65); //Restriction for the volume of the box to repeat loop
+        
+        //Shipping for package
+        if (volume<=30) //offers air for packages under 30 cubic feet
+        {
+            cout<< "\nHow is this container to be shipped:\n\n";
+            cout<<"(1) Standard-(one to two weeks) - No change to the price\n";
+            cout<<"(2) Fast Ground - (3 to 5 business day) - Extra $1.50 per cubic foot\n";
+            cout<<"(3)Air-(1-2 business days)-Only applies to packages under 30 cubic feet-Extra $3.00 per cubic foot\n\n";
+        }
+        else 
+        {
+            cout<< "\nHow is this container to be shipped:\n\n";
+            cout<<"(1) Standard-(one to two weeks) - No change to the price\n";
+            cout<<"(2) Fast Ground - (3 to 5 business day) - Extra $1.50 per cubic foot\n\n";
+        }
+
+        cout<<"Delivery: ";
+        cin>> delivery;
+
+        //Shipping cost calculation
+        switch (delivery)
+        {
+            case 1:
+            {
+                shiprate=0.00;
+                shipcost=volume*shiprate;
+                cout<<"\nStandard: $"<<shipcost;
+                break;
+            }
+            case 2:
+            {
+                shiprate=1.50;
+                shipcost= volume*shiprate;
+                cout<<"\nFast Ground ($1.50 per cu ft): $"<<shipcost;
+                break;
+            }
+            case 3:
+            {
+                shiprate=3.00;
+                shipcost = volume*shiprate;
+                cout<<"\nAir($3.00 per cu ft): $"<<shipcost;
+            }
+        }
+
+        cout<<"\n\nAdd another package (Y/N): ";
+        cin>>morebox;
+
+        //Add previous versions of cost values
+        precost+=shipcost;
+        boxtotal+=bcost;
+
+    } while (morebox == 'Y' || morebox == 'y');
+
+    //Calculate the box total
+        cout<< "\n\nContainer Total" <<setw(24)<<right<< "$" <<setw(10)<<boxtotal<<endl;
+    
+    //Calculate Premium Delivery
+        cout<<"Premium Delivery"<<setw(23)<<right<<"$"<<setw(10)<<precost<<endl<<endl;
+
+    //Equation for subtotal
+        subtotal=precost+boxtotal;
+        cout<<"Subtotal"<<setw(31)<<right<<"$"<<setw(10)<<subtotal<<endl;
+
+    //Calculate the sales tax (California)
+        sales = subtotal * tax;
+        cout<<"Sales Tax (0.0775)"<<setw(21)<<right<< "$" <<setw(10)<<sales<<endl<<endl;
+
+    //Calculate the total cost 
+       total = subtotal + sales;
+       cout<<"Total"<<setw(34)<<right<< "$" <<setw(10)<<total<<endl<<endl;
+    return total;
+}
+
+double Payment(double change)
+{
+    double cash, total, price;
+    int pay_type;
+    string license, card;
+    char card_type;
+
+    price=TotalPrice(total);
+
+    cout<< "\nPayment(1.Cash, 2.Check, 3.Credit): ";
+    cin>>pay_type;
+
+    if (pay_type==1) //Cash
+    {
+        do //set loop for verifying amount of cash
+        {
+            cout<< "\nAccepted:" <<setw(30)<<right<< "$";
+            cin>> cash;
+
+            if (price <= cash)
+            {
+                change = cash - price;
+                cout<<"Change:"<<setw(32)<<right<< "$"<<change;
+            }
+            else 
+            {
+                cout<< "\nPlease imput total funds more than $"<<price<<endl<<endl;    
+            }
+        }while (price>cash);
+    }
+    else if (pay_type==2) //Check
+    {
+        cout<<"\nEnter Driver License No:"<<setw(6)<<right;
+        cin>> license;
+        
+        //Set loop for verifying license
+        if (license.size() != 8 || !isalpha(license[0]))
+        {
+            cout<<"Enter Driver License No:"<<setw(6)<<right;
+            cin>> license;
+        }
+
+        cout<<"Accepted Check Payment:"<<setw(5)<<right<<"$"<<setw(10)<<price;
+    }
+    else if (pay_type==3)//Card
+    {
+        cout<<"\nVisa(V) or Mastercard (M):"<<setw(12)<<right;
+        cin>> card_type;
+
+        //Set loop for verifying Card
+        do 
+        {
+            cout<<"\nEnter Last Four Digits of Card:"<<setw(8)<<right;
+            cin>>card;
+        }while (card.size() !=4); 
+
+        cout<<"\nAccepted Credit Card Payment:"<<setw(10)<<right<<"$"<<setw(10)<<price;
+    }
+    return change;
+}
+
+
+East County Box Company
+
+Sales Program (version 1.5)
+
+
+Enter package dimensions for container (in feet):
+Length: 3
+Width:  4
+Height: 2
+
+Package Volume: 24 cubic feet
+Medium Package ($2.50 per cubic foot)  $60.00
+
+
+How is this container to be shipped:
+
+(1) Standard-(one to two weeks) - No change to the price
+(2) Fast Ground - (3 to 5 business day) - Extra $1.50 per cubic foot
+(3)Air-(1-2 business days)-Only applies to packages under 30 cubic feet-Extra $3.00 per cubic 
+foot
+
+Delivery: 2
+
+Fast Ground ($1.50 per cu ft): $36.00
+
+Add another package (Y/N): y
+
+Enter package dimensions for container (in feet):
+Length: 9
+Width:  2
+Height: 3
+
+Package Volume: 54.00 cubic feet
+Large Package ($3.00 per cubic foot)  $162.00
+
+
+How is this container to be shipped:
+
+(1) Standard-(one to two weeks) - No change to the price
+(2) Fast Ground - (3 to 5 business day) - Extra $1.50 per cubic foot
+
+Delivery: 1
+
+Standard: $0.00
+
+Add another package (Y/N): y
+
+Enter package dimensions for container (in feet):
+Length: 1
+Width:  2
+Height: 4
+
+Package Volume: 8.00 cubic feet
+Small Package ($1.50 per cubic foot)  $12.00
+
+
+How is this container to be shipped:
+
+(1) Standard-(one to two weeks) - No change to the price
+(2) Fast Ground - (3 to 5 business day) - Extra $1.50 per cubic foot
+(3)Air-(1-2 business days)-Only applies to packages under 30 cubic feet-Extra $3.00 per cubic 
+foot
+
+Delivery: 3
+
+Air($3.00 per cu ft): $24.00
+
+Add another package (Y/N): n
+
+
+Container Total                       $    234.00
+Premium Delivery                      $     60.00
+
+Subtotal                              $    294.00
+Sales Tax (0.0775)                    $     22.79
+
+Total                                 $    316.79
+
+
+Payment(1.Cash, 2.Check, 3.Credit): 3
+
+Visa(V) or Mastercard (M):v
+
+Enter Last Four Digits of Card:1234
+
+Accepted Credit Card Payment:         $    316.79
+PS C:\Users\Carissa\Documents\C++ programing work> 
