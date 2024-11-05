@@ -1,0 +1,46 @@
+//Carissa Ainsworth 
+//Programming Assignment 11a
+//5/16/2021
+
+#include <iostream>
+#include <string>
+#include <iomanip> //To set precision
+using namespace std;
+
+struct item
+{
+    string name; //name of item
+    double price; //price of item
+    double quantity; //quantity in stock
+};
+
+int main()
+{
+    item inventory;
+    cout<<"Enter the following data about the item\n";
+    cout<<"Name: ";
+    cin>>inventory.name;
+    cout<<"Price: $";
+    cin>>inventory.price;
+    cout<<"Quantity: ";
+    cin>>inventory.quantity;
+    
+    //output 
+    cout<< "\nHere is data on your item:\n";
+    cout<<"Name: "<<inventory.name<<endl;
+    cout<< setprecision(2)<< fixed <<showpoint; //set precision
+    cout<<"Price: $"<<inventory.price<<endl;
+    cout<<"Quantity: "<<inventory.quantity<<endl;
+    return 0;
+}
+
+Enter the following data about the item
+Name: socks
+Price: $5
+Quantity: 25
+
+Here is data on your item:
+Name: socks
+Price: $5.00
+Quantity: 25.00
+PS C:\Users\Carissa\Documents\C++ programing work> 
