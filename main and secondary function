@@ -1,0 +1,27 @@
+//Carissa Ainsworth
+//Programming Assignment 9a
+//5/6/2021
+#include <iostream>
+using namespace std;
+
+//function prototype
+void change(int &);
+
+int main()
+{
+    int num;
+    num=5;
+    cout<<"The initial number is " <<num<< ".\n";
+    change(num);
+    cout<<"The number after change is " <<num<< ".\n";
+    return 0;
+}
+
+void change(int &num)
+{
+    num=6;
+}
+
+The initial number is 5.     
+The number after change is 6.
+PS C:\Users\Carissa\Documents\C++ programing work> 
