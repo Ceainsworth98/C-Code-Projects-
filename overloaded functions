@@ -1,0 +1,49 @@
+//Carissa Ainsworth
+//Programming Assignment 6b
+//4/11/2021
+
+#include <iostream>
+using namespace std;
+
+//function Prototype
+double addition(double, double);
+int addition (int,int);
+
+int main()
+{
+    int a, b;
+    double x, y;
+
+    cout<<"Hello for this code we will be adding.\n";
+    cout<< "Type a whole number: ";
+    cin>>a;
+    cout<< "Type another whole number: ";
+    cin>>b;
+    cout<<"The sum of is " << addition(a, b)<< "\n";
+    cout<< "\nType a decimal number: ";
+    cin>> x;
+    cout<< "Type another decimal number : ";
+    cin>> y;
+    cout<<"The sum is "<<addition(x, y);
+    return 0;
+}
+
+int addition(int a, int b)
+{
+    return a+b;
+}
+
+double addition(double x, double y)
+{
+    return x+y;
+}
+
+
+Hello for this code we will be adding.
+Type a whole number: 9
+Type another whole number: 8
+The sum of is 17       
+
+Type a decimal number: 6.32
+Type another decimal number : 5.47
+The sum is 11.79
