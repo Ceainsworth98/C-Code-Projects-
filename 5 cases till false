@@ -1,0 +1,89 @@
+//Carissa Ainsworth
+//Programming Assignment 5b
+//3/14/2021
+
+#include <iostream>
+using namespace std;
+
+int main()
+{
+    int num;
+    do
+    {
+        cout<< "\nPlease enter the assigned number to your answer.\n"<<endl;
+        cout<< "What is your favorite color of the rainbow?\n\n";
+        cout<< "1) Red\n2) Orange\n3) Yellow\n4) Green\n5) Blue\n6) Indigo\n7) Violet\n";
+        cout<< "\nAnswer: ";
+        cin>> num;
+        switch (num)
+        {
+         case 1:
+            cout<< "\nYou selected the color red."<<endl;
+            cout<<"Thank you for selecting a color."<<endl;
+            break;
+        case 2:
+            cout<< "\nYou selected the color orange."<<endl;
+            cout<<"Thank you for selecting a color."<<endl;
+            break;
+        case 3:
+            cout<<"\nYou selected the color yellow."<<endl;
+            cout<<"Thank you for selecting a color."<<endl;
+            break;
+        case 4:
+            cout<< "\nYou selected the color green."<<endl;
+            cout<<"Thank you for selecting a color."<<endl;
+            break;
+        case 5:
+            cout<< "\nYou selected the color blue."<<endl;
+            cout<<"Thank you for selecting a color."<<endl;
+            break;
+        case 6:
+            cout<< "\nYou selected the color indigo."<<endl;
+            cout<<"Thank you for selecting a color."<<endl;
+            break;
+        case 7:
+            cout<< "\nYou selected the color violet."<<endl;
+            cout<<"Thank you for selecting a color."<<endl;
+            break;
+        default:
+            cout<<"\nYou've entered an option that is not associated to a color."<<endl;
+            cout<<"Plese re-enter your selection." ;
+            break;
+        }
+    }while (num< 1 ||num >7 );
+    return 0;
+}
+
+Please enter the assigned number to your answer.
+
+What is your favorite color of the rainbow?     
+
+1) Red
+2) Orange
+3) Yellow
+4) Green
+5) Blue
+6) Indigo
+7) Violet
+
+Answer: 0
+
+You've entered an option that is not associated to a color.
+Plese re-enter your selection.
+Please enter the assigned number to your answer.
+
+What is your favorite color of the rainbow?
+
+1) Red
+2) Orange
+3) Yellow
+4) Green
+5) Blue
+6) Indigo
+7) Violet
+
+Answer: 1
+
+You selected the color red.
+Thank you for selecting a color.
+PS C:\Users\Carissa\Desktop>
