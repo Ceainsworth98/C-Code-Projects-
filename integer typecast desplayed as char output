@@ -1,0 +1,29 @@
+//Carissa Ainsworth
+//Programming Assignment 3b
+//2/11/2021
+
+#include <iostream>
+#include <string>
+using namespace std;
+
+int main()
+{
+    int number;
+    char letter;
+    
+    //Convert integer to char
+    cout << "This program converts integers to Char\n";
+    cout << "Type an integer between 65-122 to be converted: ";
+    cin >> number;
+    letter = static_cast<char>(number) ;
+    cout << "The number "<<number<< " was converted to Char.\n";
+    cout << "The result is " <<letter<< "." << endl;  
+    return 0;
+}
+
+PS C:\Users\Carissa> cd "c:\Users\Carissa\Desktop\" ; if ($?) { g++ ProgrammingAssignment3b.cpp -o ProgrammingAssignment3b } ; if ($?) { .\ProgrammingAssignment3b }ogrammingAssignment3b.cpp -o ProgrammingAssignment3b } ; if ($?) { .\ProgrammingAssignment3b }
+This program converts integers to Char
+Type an integer between 65-122 to be converted: 82
+The number 82 was converted to Char.
+The result is R.
+PS C:\Users\Carissa\Desktop>
