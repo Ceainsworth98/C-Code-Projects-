@@ -1,0 +1,40 @@
+
+//Carissa Ainsworth
+//Programming Assignment 3c
+//2/11/2021
+
+#include <iostream>
+#include <iomanip> //For set precision
+#include <cmath> // For sin and cos
+using namespace std;
+
+int main()
+{
+    int number1, number2;
+    double sin_num, cos_num;
+
+    //Set Precision
+    cout << setprecision (4)<< fixed << showpoint;
+
+    //Ask and run for sine
+    cout << "What would you like to find the sine of (in radians)? ";
+    cin >> number1;
+    sin_num = sin (number1);
+    cout << "The sine of "<<number1<< " in radians is "<<sin_num<<"."<< endl<<endl;
+
+    //Ask and run for cosine
+    cout << "What would you like to find the cosine of (in radians)? ";
+    cin >> number2;
+    cos_num = cos (number2);
+    cout << "The cosine of " <<number2<< " in radians is " <<cos_num<<"."<< endl;
+
+    return 0;
+}
+
+PS C:\Users\Carissa> cd "c:\Users\Carissa\Desktop\" ; if ($?) { g++ ProgrammingAssignment3c.cpp -o ProgrammingAssignment3c } ; if ($?) { .\ProgrammingAssignment3c }
+What would you like to find the sine of (in radians)? 20  
+The sine of 20 in radians is 0.9129.
+
+What would you like to find the cosine of (in radians)? 60
+The cosine of 60 in radians is -0.9524.
+PS C:\Users\Carissa\Desktop> 
