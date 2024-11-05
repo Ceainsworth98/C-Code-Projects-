@@ -1,0 +1,43 @@
+//Carissa Ainsworth
+//Programming Assignment 7c
+//4/25/2021
+
+#include <iostream>
+#include <vector>
+using namespace std;
+int main()
+{
+    const int Num_people =5;
+    vector<int> hours(Num_people);
+    int count;
+
+    //input of hours
+    cout<< "How many hours of music did people listen to?\n";
+    for (count = 0; count < Num_people; count++)
+    {
+     cout<< "Person "<<(count+1)<<" listened to: ";
+     cin>> hours[count];
+    }
+    cout<<endl;
+
+    //display of hours
+    for (count = 0; count < Num_people; count++)
+    {
+        cout<< "The hours Person "<<(count+1)<< " listened to music was: " <<hours[count]<<" hours."<<endl;
+    }
+    return 0;
+}
+
+How many hours of music did people listen to?
+Person 1 listened to: 5           
+Person 2 listened to: 9
+Person 3 listened to: 6
+Person 4 listened to: 3
+Person 5 listened to: 7
+
+The hours Person 1 listened to music was: 5 hours.
+The hours Person 2 listened to music was: 9 hours.
+The hours Person 3 listened to music was: 6 hours.
+The hours Person 4 listened to music was: 3 hours.
+The hours Person 5 listened to music was: 7 hours.
+PS C:\Users\Carissa\Documents\C++ programing work> 
