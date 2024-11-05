@@ -1,0 +1,22 @@
+//Carissa Ainsworth
+//Programming Assignment 13b
+//5/30/2021
+
+class Student
+{
+    private:
+    string StudentID;
+    string LastName;
+    string FirstName;
+    string SSN;
+    
+    public:
+    Student(string aStudentID, string aLastName, string aFirstName, string aSSN)
+    {
+        StudentID = aStudentID;
+        LastName = aLastName;
+        FirstName = aFirstName;
+        SSN = aSSN;
+    }
+    void getStudent();
+};
