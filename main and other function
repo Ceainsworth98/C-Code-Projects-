@@ -1,0 +1,34 @@
+//Carissa Ainsworth
+//Programming Assignment 6a
+//4/11/2021
+
+#include <iostream>
+using namespace std;
+
+//function Prototype
+double addition(double, double);
+
+int main()
+{
+    double num1, num2, solution;
+    cout<<"Hello for this code we will be adding two numbers.\n";
+    solution= addition(num1,num2);
+    cout<<"The sum is "<< solution<<".";
+    return 0;
+}
+
+double addition(double num1, double num2)
+{
+    cout<< "Type a positive number: ";
+    cin>> num1;
+    cout<< "Type another positive number : ";
+    cin>> num2;
+    return num1+num2;
+}
+
+PS C:\Users\Carissa\Desktop> cd "c:\Users\Carissa\Desktop\" ; if ($?) { g++ ProgrammingAssignment6a.cpp -o ProgrammingAssignment6a } ; if ($?) { .\ProgrammingAssignment6a }
+Hello for this code we will be adding two numbers.
+Type a positive number: 80
+Type another positive number : 97
+The sum is 177.
+PS C:\Users\Carissa\Desktop> 
